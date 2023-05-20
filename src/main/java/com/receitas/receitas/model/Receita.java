@@ -20,6 +20,8 @@ public class Receita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
+
     //false nao pode ser nulo
     @Column(nullable = false)
     private String nome;
@@ -33,6 +35,8 @@ public class Receita {
 
     @Column(nullable = false)
     private Boolean restricoes;
+
+    private long id_categoria;
 
 
 
