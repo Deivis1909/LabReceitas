@@ -34,7 +34,12 @@ public class Receita {
     @Column(nullable = false)
     private Boolean restricoes;
 
-    private long id_categoria;
+
+    @ManyToOne
+    @JoinColumn(name="categoria_id",foreignKey = @ForeignKey(name="fk_categoria"),unique = true)
+    private Categoria categoria;
+
+
 
 
 
