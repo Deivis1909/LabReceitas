@@ -12,8 +12,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
-
-
 public class Receita {
 
     @Id
