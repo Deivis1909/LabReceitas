@@ -48,6 +48,7 @@ public class ReceitaController {
         return new ResponseEntity<String>("a receita numero : "+id+"  foi deletado com sucesso",HttpStatus.OK);
     }
 
+    @GetMapping
     public ResponseEntity<List<Receita>> listaTodos(){
         List<Receita> receitas = receitaService.ListaReceitas();
         return new ResponseEntity<List<Receita>>(receitas,HttpStatus.FOUND);
