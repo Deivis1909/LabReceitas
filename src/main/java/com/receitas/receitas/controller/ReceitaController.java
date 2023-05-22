@@ -48,11 +48,21 @@ public class ReceitaController {
         return new ResponseEntity<String>("a receita numero : "+id+"  foi deletado com sucesso",HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Receita>> listaTodos(){
-        List<Receita> receitas = receitaService.ListaReceitas();
-        return new ResponseEntity<List<Receita>>(receitas,HttpStatus.FOUND);
+   // @GetMapping("/lista")
+    //public ResponseEntity<List<Receita>> listaTodos(){
+      //  List<Receita> receitas = receitaService.ListaReceitas();
+        //return new ResponseEntity<List<Receita>>(receitas,HttpStatus.FOUND);
 
+    //}
+
+    @GetMapping("/lista")
+    public ResponseEntity<List<Receita>> listarTodas(){
+        List<Receita> receitas= receitaService.ListaReceitas();
+
+        if(!receitas.isEmpty())
+            return new ResponseEntity<List<Receita>>(receitas, HttpStatus.FOUND);
+        else
+            return new ResponseEntity<List<Receita>>(receitas, HttpStatus.NOT_FOUND);
     }
 
 

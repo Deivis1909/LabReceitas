@@ -1,16 +1,14 @@
 package com.receitas.receitas.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 public class Receita {
 
@@ -28,7 +26,7 @@ public class Receita {
     private String ingredientes;
 
     @Column(nullable = false)
-    private String Modo_de_Preparo;
+    private String modo_de_Preparo;
 
 
     @Column(nullable = false)

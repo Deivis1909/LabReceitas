@@ -39,10 +39,7 @@ public class ReceitaService {
 
     public List<Receita> ListaReceitas(){
 
-        List<Receita> receitas = receitaRepository.findAll();
-        return receitas;
-
-
+      return receitaRepository.findAll();
 
     }
 
