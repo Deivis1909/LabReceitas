@@ -2,6 +2,7 @@ package com.receitas.receitas.service;
 
 
 import com.receitas.receitas.model.Receita;
+import com.receitas.receitas.repository.CategoriaRepository;
 import com.receitas.receitas.repository.ReceitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,10 @@ import java.util.List;
 public class ReceitaService {
 
     @Autowired
-
     private ReceitaRepository receitaRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Transactional
     public Receita salvar(Receita receita){
@@ -27,7 +30,7 @@ public class ReceitaService {
     }
 
 
-
+    @Transactional
     public void deletar(Long id){
 
         receitaRepository.deleteById(id);
@@ -42,6 +45,7 @@ public class ReceitaService {
 
 
     }
+
 
 
 
