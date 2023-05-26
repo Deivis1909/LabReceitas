@@ -20,12 +20,13 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(unique = true,nullable = false)
     private String nome;
 
-
+    @Column(unique = true,nullable = true)
     private String descricao;
 
 

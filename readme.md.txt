@@ -12,6 +12,7 @@ Tecnologias utilizadas:
 
 1) cria se o banco de dados exerc_semana_6 no postgree
 2) configurar login , senha e configurações iniciais no arquivo Application.properties
+obss: minbha configuracao de porta deu conflito aqui e reeconfigurei a api para a porta 8090
 3) as camadas MVC Spring .
 
 #Controller :

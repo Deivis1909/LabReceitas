@@ -23,6 +23,11 @@ public class CategoriaService {
     @Transactional
     public Categoria salvar(Categoria categoria) {
 
+        // verifica se ja tem uma categoria com esse nome
+        if (categoriaRepository.equals(categoria.getNome())) {
+            throw new IllegalArgumentException("Já existe uma categoria de restrição com esse nome.");
+        }
+
         Categoria cat = categoriaRepository.save(categoria);
         return cat;
 

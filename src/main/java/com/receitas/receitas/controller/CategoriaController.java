@@ -34,7 +34,7 @@ public class CategoriaController {
     }
 
     //consumes = MediaType.APPLICATION_JSON_VALUE
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<Categoria> atualizar(@RequestBody Categoria categoria){
         Categoria cate = categoriaService.salvar(categoria);
         return new ResponseEntity<Categoria>(cate,HttpStatus.OK);
