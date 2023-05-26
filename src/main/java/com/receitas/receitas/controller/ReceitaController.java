@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/receita")
@@ -36,11 +38,15 @@ public class ReceitaController {
 
     }
 
-    @PutMapping
-    public ResponseEntity<Receita> editar(@RequestBody Receita receita){
-        Receita recei = receitaService.salvar(receita);
-        return new ResponseEntity<Receita>(recei,HttpStatus.OK);
-    }
+
+  @PutMapping
+  public ResponseEntity<Void> update(@RequestBody Receita body){
+
+      this.receitaService.update(body);
+      return ResponseEntity.ok().build();
+
+
+  }
 
     @DeleteMapping
     public ResponseEntity<String> deletar(@RequestParam long id){

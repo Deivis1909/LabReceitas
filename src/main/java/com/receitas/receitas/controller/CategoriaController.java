@@ -6,6 +6,7 @@ import com.receitas.receitas.repository.CategoriaRepository;
 import com.receitas.receitas.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,8 @@ public class CategoriaController {
 
     }
 
-    @PutMapping
+    //consumes = MediaType.APPLICATION_JSON_VALUE
+    @PutMapping()
     public ResponseEntity<Categoria> atualizar(@RequestBody Categoria categoria){
         Categoria cate = categoriaService.salvar(categoria);
         return new ResponseEntity<Categoria>(cate,HttpStatus.OK);

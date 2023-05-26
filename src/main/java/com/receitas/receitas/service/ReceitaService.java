@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReceitaService {
@@ -24,7 +25,7 @@ public class ReceitaService {
 
 
         Receita receit = receitaRepository.save(receita);
-                return receit;
+        return receit;
 
 
     }
@@ -39,8 +40,22 @@ public class ReceitaService {
 
     public List<Receita> ListaReceitas(){
 
-      return receitaRepository.findAll();
+        return receitaRepository.findAll();
 
+    }
+
+        @Transactional
+    public void update(Receita body){
+        Receita receita = this.receitaRepository.findById(body.getId());
+
+        this.receitaRepository.save(receita);
+
+    }
+    public Optional<Receita> buscarReceitaPorId(Long id) {
+        return receitaRepository.findById(id);
+    }
+    public Receita atualizarReceita(Receita receita) {
+        return receitaRepository.save(receita);
     }
 
 
@@ -49,8 +64,11 @@ public class ReceitaService {
 
 
 
-}
 
+
+
+
+}
 
 
 

@@ -3,6 +3,8 @@ package com.receitas.receitas.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+
+
 @Entity
 @Table
 @Getter
@@ -12,6 +14,7 @@ import lombok.*;
 @EqualsAndHashCode
 public class Receita {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -30,12 +33,13 @@ public class Receita {
 
 
     @Column(nullable = false)
-    private Boolean restricoes;
+    private Boolean restricao;
 
 
-    @ManyToOne
-    @JoinColumn(name="categoria_id",foreignKey = @ForeignKey(name="fk_categoria"),unique = true)
-    private Categoria categoria;
+    //cria a caluna com chave estrangeira
+        @ManyToOne
+        @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name = "fk_categoria"), unique = true)
+        private Categoria categoria;
 
 
 
