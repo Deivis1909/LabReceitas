@@ -1,15 +1,11 @@
 package com.receitas.receitas.repository;
 
 import com.receitas.receitas.model.Categoria;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-
-public interface CategoriaRepository extends JpaRepository<Categoria,Long> {
-
-
-
-
-
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
+    boolean existsByNome(String nome);
 }

@@ -6,7 +6,9 @@ import com.receitas.receitas.model.Categoria;
 import com.receitas.receitas.model.Receita;
 import com.receitas.receitas.repository.CategoriaRepository;
 import com.receitas.receitas.repository.ReceitaRepository;
+import com.receitas.receitas.service.CategoriaService;
 import com.receitas.receitas.service.ReceitaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,57 +32,40 @@ public class ReceitaController {
     @Autowired
     private ReceitaRepository receitaRepository;
 
+    private CategoriaService categoriaService;
+
     @PostMapping
-    public ResponseEntity<Receita> salvar(@RequestBody Receita receita){
-
-        Receita recei = receitaService.salvar(receita);
-        return new ResponseEntity<Receita>(recei, HttpStatus.CREATED);
-
+    public ResponseEntity<Receita> criarReceita(@RequestBody Receita receita) {
+        Receita novaReceita = receitaService.criarReceita(receita);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaReceita);
     }
 
 
-  @PutMapping
-  public ResponseEntity<Void> update(@RequestBody Receita body){
-
-      this.receitaService.update(body);
-      return ResponseEntity.ok().build();
-
-
-  }
-
-    @DeleteMapping
-    public ResponseEntity<String> deletar(@RequestParam long id){
-        receitaService.deletar(id);
-        return new ResponseEntity<String>("a receita numero : "+id+"  foi deletado com sucesso",HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<Receita>> listarReceitas() {
+        List<Receita> receitas = receitaService.listarReceitas();
+        return ResponseEntity.ok(receitas);
     }
 
-   // @GetMapping("/lista")
-    //public ResponseEntity<List<Receita>> listaTodos(){
-      //  List<Receita> receitas = receitaService.ListaReceitas();
-        //return new ResponseEntity<List<Receita>>(receitas,HttpStatus.FOUND);
-
-    //}
-
-    @GetMapping("/lista")
-    public ResponseEntity<List<Receita>> listarTodas(){
-        List<Receita> receitas= receitaService.ListaReceitas();
-
-        if(!receitas.isEmpty())
-            return new ResponseEntity<List<Receita>>(receitas, HttpStatus.FOUND);
-        else
-            return new ResponseEntity<List<Receita>>(receitas, HttpStatus.NOT_FOUND);
+    @GetMapping("/{id}")
+    public ResponseEntity<Receita> obterReceitaPorId(@PathVariable Long id) {
+        Receita receita = receitaService.obterReceitaPorId(id);
+        return ResponseEntity.ok(receita);
     }
 
-
-        @GetMapping("/por-categoria/{categoriaId}")
-        public List<Receita> listarReceitasPorCategoria(@PathVariable Long categoriaId) {
-            Categoria categoria = categoriaRepository.findById(categoriaId).orElse(null);
-            if (categoria != null) {
-                return receitaRepository.findByCategoria(categoria);
-            }
-            return Collections.emptyList();
-        }
+    @PutMapping("/{id}")
+    public ResponseEntity<Receita> atualizarReceita(@PathVariable Long id, @RequestBody Receita receitaAtualizada) {
+        receitaAtualizada = receitaService.atualizarReceita(id, receitaAtualizada);
+        return ResponseEntity.ok(receitaAtualizada);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirReceita(@PathVariable Long id) {
+        receitaService.excluirReceita(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+
 
 
 

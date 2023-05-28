@@ -11,10 +11,9 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@Data
 public class Receita {
 
-    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -22,6 +21,7 @@ public class Receita {
 
 
     //false nao pode ser nulo
+
     @Column(nullable = false)
     private String nome;
 
@@ -29,24 +29,13 @@ public class Receita {
     private String ingredientes;
 
     @Column(nullable = false)
-    private String modo_de_Preparo;
-
+    private String modoPreparo;
 
     @Column(nullable = false)
-    private Boolean restricao;
+    private boolean possuiRestricoes;
 
-
-    //cria a caluna com chave estrangeira
-        @ManyToOne
-        @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name = "fk_categoria"), unique = true)
-        private Categoria categoria;
-
-
-
-
-
-
-
+    @ManyToOne
+    private Categoria categoria;
 
 
 

@@ -7,13 +7,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
-public interface ReceitaRepository extends JpaRepository<Receita,Long> {
-    List<Receita> findByCategoria(Categoria categoria);
+public interface ReceitaRepository extends JpaRepository<Receita, Long> {
+    boolean existsByNome(String nome);
 
-    public Receita findById(@Param("id") long id);
+    boolean existsByCategoria(Categoria categoria);
 
 
 }

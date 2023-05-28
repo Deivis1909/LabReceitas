@@ -4,16 +4,12 @@ package com.receitas.receitas.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@EqualsAndHashCode(of="id")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Setter
-
 @Getter
-
 @Table
-
 @Entity
 public class Categoria {
 
@@ -26,7 +22,7 @@ public class Categoria {
     @Column(unique = true,nullable = false)
     private String nome;
 
-    @Column(unique = true,nullable = true)
+    @Column(unique = true)
     private String descricao;
 
 

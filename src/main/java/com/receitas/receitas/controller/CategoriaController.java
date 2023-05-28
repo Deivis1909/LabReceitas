@@ -32,38 +32,37 @@ public class CategoriaController {
 
 
     }
-
-    //consumes = MediaType.APPLICATION_JSON_VALUE
-    @PutMapping
-    public ResponseEntity<Categoria> atualizar(@RequestBody Categoria categoria){
-        Categoria cate = categoriaService.salvar(categoria);
-        return new ResponseEntity<Categoria>(cate,HttpStatus.OK);
-    }
-
-    @DeleteMapping
-    public ResponseEntity<String> deletar(@RequestParam long id){
-
-        categoriaService.deletarCategoria(id);
-
-        return new ResponseEntity<String>("A categoria numero"+id+" foi deletada com sucesso",HttpStatus.OK);
-
-
-    }
     @GetMapping
-    public ResponseEntity<List<Categoria>> listaTodos(){
+    public ResponseEntity<List<Categoria>> listarCategorias() {
         List<Categoria> categorias = categoriaService.listaCategorias();
-        return new ResponseEntity<List<Categoria>>(categorias,HttpStatus.FOUND);
-
-
+        return ResponseEntity.ok(categorias);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Categoria> obterCategoriaPorId(@PathVariable Long id) {
+        Categoria categoria = categoriaService.obterCategoriaPorId(id);
+        return ResponseEntity.ok(categoria);
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Categoria> atualizarCategoria(@PathVariable Long id, @RequestBody Categoria categoriaAtualizada) {
+         categoriaAtualizada = categoriaService.atualizarCategoria(id, categoriaAtualizada);
+        return ResponseEntity.ok(categoriaAtualizada);
+    }
 
-
-
-
-
-
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirCategoria(@PathVariable Long id) {
+        categoriaService.excluirCategoria(id);
+        return ResponseEntity.noContent().build();
+    }
 }
+
+
+
+
+
+
+
+
+
+
